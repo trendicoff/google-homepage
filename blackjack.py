@@ -1,4 +1,4 @@
-from art import logo
+from bjart import logo
 import random
 deck = [11,2,3,4,5,6,7,8,9,10,10,10,10]
 player_hand = []
@@ -23,7 +23,7 @@ def blackjack():
   print(f"The Dealer\'s hand is: [{dealer_hand[0]}, ?] ")
   notbust = True
 #  print(dealer_hand)
-  
+
   while notbust:
     handtotal = 0
     for card in player_hand:
@@ -43,41 +43,43 @@ def blackjack():
         print(f"You've got {handtotal} now what?\n")
       
     elif playersAnswer == "stand":
-      #break
-      print("Dealer's turn.\n")
-      dealertotal = 0
-      dealerbust = False
-      for card in dealer_hand:
+        #notbust = False
+        break
+  if notbust:
+    print("Dealer's turn.\n")
+    dealertotal = 0
+    dealerbust = False
+    for card in dealer_hand:
         dealertotal += card
-      while not dealerbust:
+    while not dealerbust:
         print(dealer_hand)
         if dealertotal > 21:
-          dealerbust = True
-          print("Dealer busted, you win!")
-        elif dealertotal > 15:
-          print(f"Dealer has {dealertotal}, dealer stands.")
-          if dealertotal > handtotal:
-            print("Sorry, you lose.")
             dealerbust = True
-          elif dealertotal < handtotal:
-            print("Congratulations!  You beat the dealer!")
-            dealerbust = True
-          else:
-            print("You tied, it's a push.")
-            dealerbust = True
-       #   else:
-       #     exit()
+            print("Dealer busted, you win!")
+        elif dealertotal > 16:
+            print(f"Dealer has {dealertotal}, dealer stands.")
+            if dealertotal > handtotal:
+                print("Sorry, you lose.")
+                dealerbust = True
+            elif dealertotal < handtotal:
+                print("Congratulations!  You beat the dealer!")
+                dealerbust = True
+            else:
+                print("You tied, it's a push.")
+                dealerbust = True
+   #   else:
+   #     exit()
         else:
-          print(f"Dealer has {dealertotal}, dealer hits.\n")
-          draw_card(1,dealer_hand)
-          dealertotal += dealer_hand[-1]
+            print(f"Dealer has {dealertotal}, dealer hits.\n")
+            draw_card(1,dealer_hand)
+            dealertotal += dealer_hand[-1]
 
   restart = input("Want to play again? (y/n)").lower()
   if restart == 'y':
-    print(restart)
     blackjack()
 
 
 
 blackjack()
+
 
